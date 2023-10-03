@@ -4,24 +4,17 @@ import { galleryItems } from "./gallery-items.js";
 
 const galleryList = document.querySelector(".gallery");
 
-// const createItem = function (element, type, child, parent, classList) {
-//   element = document.createElement(type);
-//   element.classList = classList;
-//   parent.append(child);
-// };
-
 for (const item of galleryItems) {
-  //   createItem(galleryItem, "li", galleryItem, galleryList, "gallery__item");
+  const instance = basicLightbox.create(`<img  src='${item.original}'>`);
+
   const galleryItem = document.createElement("li");
   galleryItem.classList = "gallery__item";
   galleryList.append(galleryItem);
-  //   createItem(galleryLink, "a", galleryLink, galleryItem, "gallery__link");
 
   const galleryLink = document.createElement("a");
   galleryItem.append(galleryLink);
   galleryLink.classList = "gallery__link";
   galleryLink.setAttribute("href", item.original);
-  //   createItem(galleryImage, "img", galleryImage, galleryLink, "gallery__image");
 
   const galleryImage = document.createElement("img");
   galleryLink.append(galleryImage);
@@ -30,8 +23,8 @@ for (const item of galleryItems) {
   galleryImage.setAttribute("alt", item.description);
 
   galleryLink.addEventListener("click", (e) => {
+    console.log(e);
     e.preventDefault();
-    const instance = basicLightbox.create(`<img  src='${item.original}'>`);
     instance.show();
   });
 }
