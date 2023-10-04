@@ -1,23 +1,37 @@
 import { galleryItems } from "./gallery-items.js";
 
-const galleryList = document.querySelector(".gallery");
-// Change code below this line
-for (const item of galleryItems) {
-  const galleryItem = document.createElement("li");
+const createElement = function (tag) {
+  const element = document.createElement(tag);
+  return element;
+};
+
+const appendElement = function (parent, child) {
+  const element = parent.append(child);
+  return element;
+};
+
+const createGaleryItem = function (item) {
+  const galleryList = document.querySelector(".gallery");
+  const galleryItem = createElement("li");
+  const galleryLink = createElement("a");
+  const galleryImage = createElement("img");
+
+  appendElement(galleryList, galleryItem);
+  appendElement(galleryItem, galleryLink);
+  appendElement(galleryLink, galleryImage);
+
   galleryItem.classList = "gallery__item";
-  galleryList.append(galleryItem);
-
-  const galleryLink = document.createElement("a");
-  galleryItem.append(galleryLink);
   galleryLink.classList = "gallery__link";
-  galleryLink.setAttribute("href", item.original);
-
-  const galleryImage = document.createElement("img");
-  galleryLink.append(galleryImage);
   galleryImage.classList = "gallery__image";
+
+  galleryLink.setAttribute("href", item.original);
   galleryImage.setAttribute("src", item.preview);
   galleryImage.setAttribute("alt", item.description);
-}
+};
+
+galleryItems.forEach((item) => {
+  createGaleryItem(item);
+});
 
 let gallery = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
