@@ -28,6 +28,7 @@ const createGaleryItem = function (item) {
   galleryLink.setAttribute("href", item.original);
   galleryImage.setAttribute("src", item.preview);
   galleryImage.setAttribute("alt", item.description);
+  galleryImage.setAttribute("data-source", item.original);
 
   galleryLink.addEventListener("click", (e) => {
     e.preventDefault();
